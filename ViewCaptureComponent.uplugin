@@ -1,0 +1,24 @@
+{
+	"FileVersion": 3,
+	"Version": 1,
+	"VersionName": "1.0",
+	"FriendlyName": "ViewCaptureComponent",
+	"Description": "Add feature of ViewCaptureComponent (base: Scene Component). This is useful for outputting the image seen by the camera as it is to an image file.",
+	"Category": "Other",
+	"CreatedBy": "Udon-Tobira",
+	"CreatedByURL": "",
+	"DocsURL": "",
+	"MarketplaceURL": "",
+	"SupportURL": "",
+	"CanContainContent": true,
+	"IsBetaVersion": false,
+	"IsExperimentalVersion": false,
+	"Installed": false,
+	"Modules": [
+		{
+			"Name": "ViewCaptureComponent",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
