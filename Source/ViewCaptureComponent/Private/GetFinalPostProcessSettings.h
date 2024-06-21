@@ -9,6 +9,12 @@
 #include "GetFinalPostProcessSettings.generated.h"
 
 /**
+ *
+ */
+UENUM()
+enum class EGetFinalPostProcessSettingsResult : uint8 { Success, Failure };
+
+/**
  * Class for getting viewport's Final Post Process Settings.
  */
 UCLASS()
@@ -19,7 +25,9 @@ public:
 	/**
 	 * Get viewport's Final Post Process Settings.
 	 */
-	UFUNCTION(BlueprintCallable)
-	static FPostProcessSettings
-	    GetFinalPostProcessSettings(const APlayerController* PlayerController);
+	UFUNCTION(BlueprintCallable, meta = (ExpandEnumAsExecs = "Result"))
+	static void
+	    GetFinalPostProcessSettings(const APlayerController* PlayerController,
+	                                EGetFinalPostProcessSettingsResult& Result,
+	                                FPostProcessSettings& PostProcessSettings);
 };

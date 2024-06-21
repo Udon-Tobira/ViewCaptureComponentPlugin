@@ -2,17 +2,28 @@
 
 #include "GetFinalPostProcessSettings.h"
 
-FPostProcessSettings UGetFinalPostProcessSettings::GetFinalPostProcessSettings(
-    const APlayerController* PlayerController) {
-	check(PlayerController != nullptr);
+void UGetFinalPostProcessSettings::GetFinalPostProcessSettings(
+    const APlayerController*            PlayerController,
+    EGetFinalPostProcessSettingsResult& Result,
+    FPostProcessSettings&               PostProcessSettings) {
+	if (nullptr == PlayerController) {
+		Result = EGetFinalPostProcessSettingsResult::Failure;
+		return;
+	}
 
 	// Get World
 	const auto World = PlayerController->GetWorld();
-	check(World != nullptr);
+	if (nullptr == World) {
+		Result = EGetFinalPostProcessSettingsResult::Failure;
+		return;
+	}
 
 	// Get Local Player
 	const auto LocalPlayer = PlayerController->GetLocalPlayer();
-	check(LocalPlayer != nullptr);
+	if (nullptr == LocalPlayer) {
+		Result = EGetFinalPostProcessSettingsResult::Failure;
+		return;
+	}
 
 	// Create ViewFamily
 	FSceneViewFamilyContext ViewFamily(
@@ -27,8 +38,12 @@ FPostProcessSettings UGetFinalPostProcessSettings::GetFinalPostProcessSettings(
 	const auto SceneView = LocalPlayer->CalcSceneView(
 	    &ViewFamily, /*out*/ ViewLocation, /*out*/ ViewRotation,
 	    LocalPlayer->ViewportClient->Viewport);
-	check(SceneView != nullptr);
+	if (nullptr == SceneView) {
+		Result = EGetFinalPostProcessSettingsResult::Failure;
+		return;
+	}
 
-	// return FinalPostProcessSettings
-	return SceneView->FinalPostProcessSettings;
+	// set result
+	PostProcessSettings = SceneView->FinalPostProcessSettings;
+	Result              = EGetFinalPostProcessSettingsResult::Success;
 }
