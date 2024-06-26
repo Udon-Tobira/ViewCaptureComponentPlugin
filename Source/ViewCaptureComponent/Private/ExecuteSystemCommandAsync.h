@@ -5,17 +5,17 @@
 #include "CoreMinimal.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 
-#include "ExecuteSystemCommand.generated.h"
+#include "ExecuteSystemCommandAsync.generated.h"
 
 /**
  * Execute system(shell) command class
  */
 UCLASS()
-class UExecuteSystemCommand: public UBlueprintFunctionLibrary {
+class UExecuteSystemCommandAsync: public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 
 public:
-	// Execute system(shell) command
+	// Execute system(shell) command asynchronously.
 	UFUNCTION(BlueprintCallable)
-	static void ExecuteSystemCommand(const FString& Command);
+	static void ExecuteSystemCommandAsync(const FString& Command);
 };
