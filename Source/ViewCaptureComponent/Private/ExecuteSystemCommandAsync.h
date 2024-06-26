@@ -14,8 +14,13 @@ UCLASS()
 class UExecuteSystemCommandAsync: public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 
+	/* Blueprint Functions */
 public:
 	// Execute system(shell) command asynchronously.
-	UFUNCTION(BlueprintCallable)
-	static void ExecuteSystemCommandAsync(const FString& Command);
+	UFUNCTION(BlueprintCallable, Category = "SystemCommandInterface",
+	          meta = (Latent, LatentInfo = "LatentActionInfo",
+	                  WorldContext = "WorldContextObject"))
+	static void ExecuteSystemCommandAsync(const UObject*    WorldContextObject,
+	                                      FLatentActionInfo LatentActionInfo,
+	                                      const FString&    Command);
 };
